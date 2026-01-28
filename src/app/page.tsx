@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import LoginButton from "@/components/LoginButton";
-import GraphWrapper from "@/components/GraphWrapper";
+import UniverseView from "@/components/UniverseView"; // Use the new wrapper
 import { getMusicGraphData } from "@/lib/spotify-data";
 
 export default async function Home() {
@@ -41,14 +41,8 @@ export default async function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between bg-[#050505] overflow-hidden relative">
-      <div className="absolute top-4 left-4 z-50 bg-black/50 backdrop-blur-md p-4 rounded-xl border border-white/10 pointer-events-none select-none">
-        <h2 className="text-white font-bold text-sm">Your Universe</h2>
-        <p className="text-xs text-gray-400">{graphData.nodes.length} Artists • {graphData.links.length} Connections</p>
-      </div>
-      <div className="w-full h-full absolute inset-0">
-        <GraphWrapper data={graphData} />
-      </div>
+    <main className="min-h-screen bg-[#050505]">
+      <UniverseView data={graphData} />
     </main>
   );
 }
